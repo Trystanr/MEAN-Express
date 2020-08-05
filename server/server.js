@@ -1,8 +1,10 @@
 var express = require('express');
 var path = require('path');
+
+var authenticator = require('./authenticator');
 var logger = require('./logger');
 
-var data = require('./data.js')
+var data = require('./data.js');
 
 var app = express();
 var port = 8000;
@@ -12,6 +14,7 @@ var urlpath = path.join(__dirname, '../frontend/build/');
 
 app.use(logger);
 app.use(express.static(urlpath));
+app.use(authenticator);
 
 app.get('/', function ( req, res ) {
 	res.send(urlpath);
