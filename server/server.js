@@ -4,15 +4,8 @@ var path = require('path');
 var app = express();
 var port = 8000;
 
-var urlpath = path.join(__dirname, '../frontend/build/');
-
-
-// app.use(express.static('public'));
-
 app.get('/', function ( req, res ) {
-	// res.sendFile(__dirname + '/frontend/index.html');
-
-	res.sendFile(urlpath);
+	res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/api/v1/categories' , function (req, res) {
