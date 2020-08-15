@@ -33,3 +33,15 @@ Call `nodemon`
 
 ### Get a user id when a valid email and password are supplied
 `localhost:8000/api/v1/login?passcode=owiteacher&email=murray@highschool.com&password=4567`
+
+
+Use JWT for authentication
+
+React hooks - call api - save into state
+React using hooks only
+Codesandbox
+
+Create react app, useState
+functional component instead of class
+
+useEffect - inside function, fetch
