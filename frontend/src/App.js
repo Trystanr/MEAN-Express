@@ -1,44 +1,51 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import { Home } from './components/Home';
+import Login from './components/Login';
+
 
 function App() {
 
-	function formatBool(bool) {
-		if (bool) {
-			return "Hello";
-		} else {
-			return "Goodbaye";
-		}
-	}
-
-	const [boolVal, setBoolVal] = useState(false);
-
-	const buttonClick = () => {
-		setBoolVal(!boolVal)
-	}
-
 	return (
-		<div className="App">
-		    <header className="App-header">
-		    	<img src={logo} className="App-logo" alt="logo" />
-		    	<p>
-		    	  Edit <code>src/App.js</code> and save to reload.
-		    	</p>
-		    	<a
-		    	  className="App-link"
-		    	  href="https://reactjs.org"
-		    	  target="_blank"
-		    	  rel="noopener noreferrer"
-		    	>
-		    	  {formatBool(boolVal)}
-		    	</a>
+		<Router>
+		      <div>
+		        <nav>
+		          <ul>
+		            <li>
+		              <Link to="/">Home</Link>
+		            </li>
+		            <li>
+		              <Link to="/login">Login</Link>
+		            </li>
+		            <li>
+		              <Link to="/register">Register</Link>
+		            </li>
+		          </ul>
+		        </nav>
 
-		    	<button onClick={buttonClick}>Click</button>
-		    </header>
-
-      
-    	</div>
+		        {/* A <Switch> looks through its children <Route>s and
+		            renders the first one that matches the current URL. */}
+		        <Switch>
+		          <Route path="/login">
+		            <Login />
+		          </Route>
+		          <Route path="/users">
+		            {/* <Users /> */}
+		          </Route>
+		          <Route path="/">
+		            <Home />
+		          </Route>
+		        </Switch>
+		      </div>
+		    </Router>
 	);
 }
 

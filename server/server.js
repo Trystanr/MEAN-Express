@@ -4,6 +4,8 @@ var path = require('path');
 require('dotenv').config();
 const jwt = require("jsonwebtoken");
 
+var cors = require('cors');
+
 var authenticator = require('./authenticator');
 var logger = require('./logger');
 
@@ -15,9 +17,19 @@ var cookieParser = require('cookie-parser');
 var app = express();
 var port = 8000;
 
+var corsOptions = {
+	// Unsafe, use specific domain only
+	origin: '*',
+	optionsSuccessStatus: 200
+}
+
 var urlpath = path.join(__dirname, '../frontend/build/');
 
 app.use(logger);
+
+// Can disable if using the react build
+app.use(cors(corsOptions));
+
 app.use(express.static(urlpath));
 
 app.use(cookieParser());
@@ -36,11 +48,6 @@ app.get('/', function ( req, res ) {
 
 app.get('/api/v1/all' , function (req, res) {
 	res.json(data);
-});
-
-app.get('/api/v1/categories' , function (req, res) {
-	var categories = ['aerobic', 'strength', 'balance', 'flexibility'];
-	res.json(categories);
 });
 
 
@@ -221,8 +228,10 @@ app.post('/api/v1/login', (req, res) => {
 	res.json({token: token});
 });
 
-app.get('/api/v1/protected', authenticator, (req,res) => {
+app.post('/api/v1/protected', authenticator, (req,res) => {
 	res.json(req.user);
+
+	// Apply authorization header to options parameter of fetch function
 });
 
 

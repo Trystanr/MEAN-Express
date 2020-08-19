@@ -45,3 +45,21 @@ Create react app, useState
 functional component instead of class
 
 useEffect - inside function, fetch
+
+
+### Run instructions
+
+## Development
+### Both must be running at the same time
+`npm run` in `~/frontend`
+Builds React frontend
+
+`nodemon` in `~/server`
+Runs Express server
+
+## Production
+`npm run-script build` in `~/frontend`
+Builds React frontend
+
+`nodemon` in `~/server`
+Runs Express server
