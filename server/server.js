@@ -1,10 +1,16 @@
 var express = require('express');
 var path = require('path');
 
+require('dotenv').config();
+const jwt = require("jsonwebtoken");
+
 var authenticator = require('./authenticator');
 var logger = require('./logger');
 
 var data = require('./data.js');
+
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 var app = express();
 var port = 8000;
@@ -13,7 +19,16 @@ var urlpath = path.join(__dirname, '../frontend/build/');
 
 app.use(logger);
 app.use(express.static(urlpath));
-app.use(authenticator);
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+// app.use(authenticator);
+
+app.param('name', function (req, res, next) {
+	req.lowerName = req.params.name.toLowerCase();
+	next();
+});
+
 
 app.get('/', function ( req, res ) {
 	res.send(urlpath);
@@ -168,25 +183,49 @@ app.get('/api/v1/learner/:learnerID/classes', function(req,res) {
 /* USER ID */
 
 // Get ID by passing in ?email and ?password
-app.get('/api/v1/login', function(req,res) {
-	var teacherIndex = -1;
+// app.get('/api/v1/login', function(req,res) {
+// 	var teacherIndex = -1;
 
-	for (var i = data.teachers.length - 1; i >= 0; i--) {
-		if (data.teachers[i].email == req.query.email) {
-			teacherIndex = i;
-		}
-	}
+// 	for (var i = data.teachers.length - 1; i >= 0; i--) {
+// 		if (data.teachers[i].email == req.query.email) {
+// 			teacherIndex = i;
+// 		}
+// 	}
 
-	if ((teacherIndex != -1) && (req.query.password == data.teachers[teacherIndex].password)) {
-		res.json(data.teachers[teacherIndex].id);
-	} else {
-		res.status(400).send("Invalid details.");
-	}
-});
+// 	if ((teacherIndex != -1) && (req.query.password == data.teachers[teacherIndex].password)) {
+// 		res.json(data.teachers[teacherIndex].id);
+// 	} else {
+// 		res.status(400).send("Invalid details.");
+// 	}
+// });
 
 app.get('/home', function(req, res) {
 	res.redirect(301, '/');
 });
+
+// Get information from the user
+app.post('/api/v1/login', (req, res) => {
+	var loginDetails = req.body;
+	console.log(loginDetails);
+
+	// TODO: Validate that the user exists in the database/datafile
+
+	// Decrypt password with bcrypt
+
+	// The register route will encrypt the password and then post into database
+	
+	const token = jwt.sign({"name":"trystan", "id":"12345"}, process.env.ACCESS_TOKEN_SECRET);
+
+	res.cookie("token", token);
+
+	res.json({token: token});
+});
+
+app.get('/api/v1/protected', authenticator, (req,res) => {
+	res.json(req.user);
+});
+
+
 
 app.listen(port, () => {
 	console.log(`Server running on http://localhost:${port}`);
