@@ -176,7 +176,7 @@ app.get('/api/v1/learner/:learnerID/classes', function(req,res) {
 
 	for (var i = data.classes.length - 1; i >= 0; i--) {
 		if (data.learners[learnerID-1].classes.includes(data.classes[i].id)) {
-			classRes.push({"slot":data.classes[i].slot,"subject":data.classes[i].subject,"group":data.classes[i].group,"classroom":data.classes[i].classroom});
+			classRes.push({"id":data.classes[i].id,"slot":data.classes[i].slot,"subject":data.classes[i].subject,"group":data.classes[i].group,"classroom":data.classes[i].classroom});
 		}
 	}
 
