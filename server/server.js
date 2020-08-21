@@ -48,6 +48,8 @@ app.get('/', function ( req, res ) {
 	res.send(urlpath);
 });
 
+
+
 app.get('/api/v1/all' , function (req, res) {
 	res.json(data);
 });
@@ -292,7 +294,7 @@ app.post('/api/v1/login', (req, res) => {
 				);
 
 				// res.json({ "hello":"world" });
-				res.cookie("access_token", token).send("cookie written");
+				res.cookie("access_token", token).send("success");
 			} else {
 				// Wrong password given
 				res.json({error: "incorrect password"});
@@ -310,7 +312,9 @@ app.post('/api/v1/protected', authenticator, (req,res) => {
 	// Apply authorization header to options parameter of fetch function
 });
 
-
+app.get("/*", (req, res) => {
+	res.sendFile(urlpath+'index.html');
+});
 
 app.listen(port, () => {
 	console.log(`Server running on http://localhost:${port}`);

@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState, Component } from "react";
+
 import ClassView from "./ClassView";
 
-export const Classes = () => {
+import Cookies from "universal-cookie";
+const jwt = require("jsonwebtoken");
 
-  return (
-    <div>
-      <h1>Taught Classes</h1>
-      <ClassView />
-    </div>
-  )
+const cookies = new Cookies();
+
+export class Classes extends Component {
+	
+	render() {
+				return (
+					<div>
+						<h1>Taught Classes</h1>
+						<ClassView userID="5" />
+					</div>
+				);
+			}
 }

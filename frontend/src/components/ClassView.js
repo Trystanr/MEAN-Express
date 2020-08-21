@@ -12,6 +12,13 @@ class ClassView extends React.Component {
 		redirectClass: null
 	};
 
+	constructor(props) {
+		super(props);
+		console.log(props.userID);
+
+		this.state.userID = props.userID;
+	}
+
 
 	componentDidMount() {
 		fetch("http://localhost:8000/api/v1/teacher/" + this.state.userID + "/classes", {
@@ -44,13 +51,12 @@ class ClassView extends React.Component {
 		};
 
 		return this.state.data.map((student, index) => {
-			const { id, slot, subject, group, classroom } = student;
+			const { id, slot, subject, classroom } = student;
 			return (
 				<tr key={id} onClick={(e) => classClick(id, e)}>
 					<td>{id}</td>
 					<td>{slot}</td>
 					<td>{subject}</td>
-					<td>{group}</td>
 					<td>{classroom}</td>
 				</tr>
 			);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import './App.css';
 
 import {
@@ -14,8 +14,37 @@ import { Edit } from "./components/Edit";
 import Login from './components/Login';
 import ClassDetail from './components/ClassDetail';
 
+import Cookies from 'universal-cookie';
+const jwt = require("jsonwebtoken");
+
+const cookies = new Cookies();
 
 function App() {
+
+	const [loading, setLoading] = useState(true);
+	const [data, setData] = useState({});
+
+	if (loading) {
+		if (cookies.get("access_token") === undefined) {
+			console.log("user is not logged in");
+			setLoading(false);
+		} else {
+			console.log(cookies.get("access_token"));
+
+			jwt.verify(
+				cookies.get("access_token"),
+				process.env.REACT_APP_ACCESS_TOKEN_SECRET,
+				function (err, decoded) {
+					if (decoded.id != null) {
+						console.log(decoded);
+						setData(decoded);
+						setLoading(false);
+					}
+				}
+			);
+		}
+	}
+		
 
 	return (
 		<Router>
@@ -27,12 +56,16 @@ function App() {
 								<strong>Home</strong>
 							</Link>
 						</li>
-						<li>
-							<Link to="/login">Login</Link>
-						</li>
-						<li>
-							<Link to="/register">Register</Link>
-						</li>
+						{data.id === undefined && (
+							<li>
+								<Link to="/login">Login</Link>
+							</li>
+						)}
+						{data.id === undefined && (
+							<li>
+								<Link to="/register">Register</Link>
+							</li>
+						)}
 						<li>
 							<Link to="/classes">My Classes</Link>
 						</li>
@@ -40,8 +73,6 @@ function App() {
 				</nav>
 
 				<div id="app-content">
-					{/* A <Switch> looks through its children <Route>s and
-		            renders the first one that matches the current URL. */}
 					<Switch>
 						<Route path="/login">
 							<Login />
