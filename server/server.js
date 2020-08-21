@@ -257,7 +257,7 @@ app.post('/api/v1/register', (req, res) => {
 			console.log("data written");
 		});
 
-		res.json({ status: "success" });
+		res.send("success");
 	});
 
 	

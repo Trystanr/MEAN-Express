@@ -1,9 +1,9 @@
 {
   "teachers": [
     {
-      "name": "trystan",
-      "email": "email@email.com",
-      "password": "pass1",
+      "name": "Mr Hunt",
+      "email": "hunt@highschool.com",
+      "password": "1234",
       "classes": [
         1,
         2,
@@ -13,22 +13,34 @@
         22
       ],
       "id": 1,
-      "hashedPass": "$2b$04$aTwFcW9HsMs/zh9j6W9zv.0PLqbsqi4ZzJuXeV43e/oIl0qo9jtPy"
+      "hashedPass": "$2b$04$mNt43ciDibYL7eceo9jXLOox5iLimEww3FiKUWn3uXOvE5hCr4iU."
     },
     {
-      "name": "trystan",
-      "email": "email@email.com",
-      "password": "pass1",
+      "name": "Mr Mclaughlin",
+      "email": "mclaughlin@highschool.com",
+      "password": "2345",
       "classes": [
-        1,
-        2,
-        11,
-        12,
-        21,
-        22
+        6,
+        7,
+        26,
+        27
       ],
       "id": 2,
-      "hashedPass": "$2b$04$LIXm1oTVvwgG4csZLAeDF.ABB8KjcplEEphHlY35Ve.gFbvQ/Ncm6"
+      "hashedPass": "$2b$04$K02AVYVbcSYTHqw4q0H/2.RAg2AI.bQ2QTyWBIoGVuKrT79/ZotO2"
+    },
+    {
+      "name": "Ms Berger",
+      "email": "berger@highschool.com",
+      "password": "3456",
+      "classes": [
+        3,
+        4,
+        13,
+        14,
+        23
+      ],
+      "id": 3,
+      "hashedPass": "$2b$04$ARxVWwVrk3ezTIdXc5Z/YO.X0YqEZT67tE6oPdQbSoRvyCxU3VBoi"
     }
   ]
 }

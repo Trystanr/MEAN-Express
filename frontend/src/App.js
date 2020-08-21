@@ -10,8 +10,9 @@ import {
 
 import { Home } from "./components/Home";
 import { Classes } from "./components/Classes";
-import { Edit } from "./components/Edit";
+import Register from "./components/Register";
 import Login from './components/Login';
+import Logout from './components/Logout';
 import ClassDetail from './components/ClassDetail';
 
 import Cookies from 'universal-cookie';
@@ -66,27 +67,38 @@ function App() {
 								<Link to="/register">Register</Link>
 							</li>
 						)}
-						<li>
-							<Link to="/classes">My Classes</Link>
-						</li>
+						{data.id !== undefined && (
+							<li>
+								<Link to="/logout">Log Out</Link>
+							</li>
+						)}
+						{data.id !== undefined && (
+							<li>
+								<Link to="/classes">My Classes</Link>
+							</li>
+						)}
 					</ul>
 				</nav>
 
 				<div id="app-content">
 					<Switch>
+						<Route path="/register">
+							<Register />
+						</Route>
 						<Route path="/login">
 							<Login />
 						</Route>
+						<Route path="/logout">
+							<Logout />
+						</Route>
+
 						<Route path="/classes">
 							<Classes />
-						</Route>
-						<Route path="/edit">
-							<Edit />
 						</Route>
 						<Route path="/classdetail/:classid">
 							<ClassDetail />
 						</Route>
-						<Route path="/users">{/* <Users /> */}</Route>
+
 						<Route path="/">
 							<Home />
 						</Route>

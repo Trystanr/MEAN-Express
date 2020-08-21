@@ -43,8 +43,8 @@ function ClassDetail() {
 	return (
 		<div>
 			<h3>Class {classid}</h3>
-			<h4>Class Name: {data.class}</h4>
-			<h4>Class: {data.classnumber}</h4>
+			<h3>Class Name: {data.class}</h3>
+			<h3>Classroom: {data.classnumber}</h3>
 
 			<table>
 				<tbody>
