@@ -1,0 +1,34 @@
+{
+  "teachers": [
+    {
+      "name": "trystan",
+      "email": "email@email.com",
+      "password": "pass1",
+      "classes": [
+        1,
+        2,
+        11,
+        12,
+        21,
+        22
+      ],
+      "id": 16,
+      "hashedPass": "$2b$04$aTwFcW9HsMs/zh9j6W9zv.0PLqbsqi4ZzJuXeV43e/oIl0qo9jtPy"
+    },
+    {
+      "name": "trystan",
+      "email": "email@email.com",
+      "password": "pass1",
+      "classes": [
+        1,
+        2,
+        11,
+        12,
+        21,
+        22
+      ],
+      "id": 17,
+      "hashedPass": "$2b$04$LIXm1oTVvwgG4csZLAeDF.ABB8KjcplEEphHlY35Ve.gFbvQ/Ncm6"
+    }
+  ]
+}

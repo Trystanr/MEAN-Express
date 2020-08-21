@@ -23,7 +23,9 @@ function App() {
 				<nav>
 					<ul>
 						<li>
-							<Link to="/">Home</Link>
+							<Link to="/">
+								<strong>Home</strong>
+							</Link>
 						</li>
 						<li>
 							<Link to="/login">Login</Link>
@@ -34,32 +36,31 @@ function App() {
 						<li>
 							<Link to="/classes">My Classes</Link>
 						</li>
-						<li>
-							<Link to="/edit">Edit Classes</Link>
-						</li>
 					</ul>
 				</nav>
 
-				{/* A <Switch> looks through its children <Route>s and
+				<div id="app-content">
+					{/* A <Switch> looks through its children <Route>s and
 		            renders the first one that matches the current URL. */}
-				<Switch>
-					<Route path="/login">
-						<Login />
-					</Route>
-					<Route path="/classes">
-						<Classes />
-					</Route>
-					<Route path="/edit">
-						<Edit />
-					</Route>
-					<Route path="/classdetail/:classid">
-						<ClassDetail />
-					</Route>
-					<Route path="/users">{/* <Users /> */}</Route>
-					<Route path="/">
-						<Home />
-					</Route>
-				</Switch>
+					<Switch>
+						<Route path="/login">
+							<Login />
+						</Route>
+						<Route path="/classes">
+							<Classes />
+						</Route>
+						<Route path="/edit">
+							<Edit />
+						</Route>
+						<Route path="/classdetail/:classid">
+							<ClassDetail />
+						</Route>
+						<Route path="/users">{/* <Users /> */}</Route>
+						<Route path="/">
+							<Home />
+						</Route>
+					</Switch>
+				</div>
 			</div>
 		</Router>
 	);

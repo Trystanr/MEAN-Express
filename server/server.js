@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 
 var cors = require('cors');
 
+const bcrypt = require("bcrypt");
+
 var authenticator = require('./authenticator');
 var logger = require('./logger');
 
@@ -19,9 +21,9 @@ var port = 8000;
 
 var corsOptions = {
 	// Unsafe, use specific domain only
-	origin: '*',
-	optionsSuccessStatus: 200
-}
+	origin: "*",
+	optionsSuccessStatus: 200,
+};
 
 var urlpath = path.join(__dirname, '../frontend/build/');
 
@@ -148,7 +150,13 @@ app.get('/api/v1/teacher/:teacherID/classes', function(req,res) {
 
 	for (var i = data.classes.length - 1; i >= 0; i--) {
 		if (data.teachers[teacherID-1].classes.includes(data.classes[i].id)) {
-			classRes.push({"slot":data.classes[i].slot,"subject":data.classes[i].subject,"group":data.classes[i].group,"classroom":data.classes[i].classroom});
+			classRes.push({
+				id: data.classes[i].id,
+				slot: data.classes[i].slot,
+				subject: data.classes[i].subject,
+				group: data.classes[i].group,
+				classroom: data.classes[i].classroom,
+			});
 		}
 	}
 
@@ -210,22 +218,90 @@ app.get('/home', function(req, res) {
 	res.redirect(301, '/');
 });
 
+var fs = require('fs');
+
+var userFilePath = __dirname + '/users.json';
+
+app.post('/api/v1/register', (req, res) => {
+	var registerDetails = req.body;
+	console.log(registerDetails);
+
+	if (!fs.existsSync(userFilePath)) {
+		var arrData = {
+			"users": []
+		};
+
+		fs.writeFile(userFilePath, JSON.stringify(arrData, null, 2), (err) => {
+			if (err) throw err;
+
+			console.log("data written");
+		})
+	}
+
+	let rawData = fs.readFileSync(userFilePath);
+	let users = JSON.parse(rawData);
+
+	let lastID = users.teachers[users.teachers.length-1].id;
+	registerDetails.id = lastID+1;
+
+	bcrypt.hash(registerDetails.password, 2, (err,hash) => {
+		registerDetails.hashedPass = hash;
+
+		users.teachers.push(registerDetails);
+
+		fs.writeFile(userFilePath, JSON.stringify(users, null, 2), (err) => {
+			if (err) throw err;
+
+			console.log("data written");
+		});
+
+		res.json({ status: "success" });
+	});
+
+	
+});
+
 // Get information from the user
 app.post('/api/v1/login', (req, res) => {
 	var loginDetails = req.body;
+
 	console.log(loginDetails);
 
 	// TODO: Validate that the user exists in the database/datafile
+	let rawData = fs.readFileSync(userFilePath);
+	let users = JSON.parse(rawData);
 
-	// Decrypt password with bcrypt
+	// console.log(users);
 
-	// The register route will encrypt the password and then post into database
-	
-	const token = jwt.sign({"name":"trystan", "id":"12345"}, process.env.ACCESS_TOKEN_SECRET);
+	var bUser = {};
+	for (let i = 0; i < users.teachers.length; i++) {
+		if (users.teachers[i].email == loginDetails.email) {
+			bUser = users.teachers[i];
+		}
+	}
 
-	res.cookie("token", token);
+	if (bUser!=={}) {
 
-	res.json({token: token});
+		bcrypt.compare(loginDetails.password, bUser.hashedPass, (err,result) => {
+			if (result == true) {
+				// Correct password given, write cookie
+
+				const token = jwt.sign(
+					{ email: loginDetails.email, id: bUser.id },
+					process.env.ACCESS_TOKEN_SECRET
+				);
+
+				// res.json({ "hello":"world" });
+				res.cookie("access_token", token).send("cookie written");
+			} else {
+				// Wrong password given
+				res.json({error: "incorrect password"});
+			}
+		})
+	}
+
+	// res.json({token: token});
+	// res.json();
 });
 
 app.post('/api/v1/protected', authenticator, (req,res) => {

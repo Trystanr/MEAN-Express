@@ -14,7 +14,7 @@ class ClassView extends React.Component {
 
 
 	componentDidMount() {
-		fetch("http://localhost:8000/api/v1/learner/" + this.state.userID + "/classes", {
+		fetch("http://localhost:8000/api/v1/teacher/" + this.state.userID + "/classes", {
 			method: "GET",
 		})
 			.then((response) => response.json())
@@ -47,6 +47,7 @@ class ClassView extends React.Component {
 			const { id, slot, subject, group, classroom } = student;
 			return (
 				<tr key={id} onClick={(e) => classClick(id, e)}>
+					<td>{id}</td>
 					<td>{slot}</td>
 					<td>{subject}</td>
 					<td>{group}</td>
@@ -84,10 +85,10 @@ class ClassView extends React.Component {
 					<div>loading</div>
 				) : (
 					<div>
-						<h2 id="title">Student: {this.state.userID}</h2>
+						<h2 id="title">Teacher ID: {this.state.userID}</h2>
 						<table id="students">
 							<tbody>
-								<tr>{this.renderTableHeader()}</tr>
+								<tr id="table-head">{this.renderTableHeader()}</tr>
 								{this.renderTableData()}
 							</tbody>
 						</table>
