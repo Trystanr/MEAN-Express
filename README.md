@@ -82,6 +82,7 @@ The brief for this project was to create an Express server for an online high sc
 1. Run `npm install`
 1. Run `nodemon`
 1. Open a new terminal instance
+1. cd to `frontend`
 1. Run `npm install`
 1. Run `npm run build`
 1. On build completion, navigate to `localhost:8000`
