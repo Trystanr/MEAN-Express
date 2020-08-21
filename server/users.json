@@ -41,6 +41,32 @@
       ],
       "id": 3,
       "hashedPass": "$2b$04$ARxVWwVrk3ezTIdXc5Z/YO.X0YqEZT67tE6oPdQbSoRvyCxU3VBoi"
+    },
+    {
+      "name": "Mr Peters",
+      "email": "peters@highschool.com",
+      "password": "5678",
+      "classes": [
+        5,
+        15,
+        25,
+        30
+      ],
+      "id": 4,
+      "hashedPass": "$2b$04$izu7twFBt8o6dQsRIwumY.NSPiaIHR2tZA6ZPbLbQq18fnLZ6hLPm"
+    },
+    {
+      "name": "Mr Smith Farvins",
+      "email": "farvins@school.com",
+      "password": "1234",
+      "classes": [
+        5,
+        15,
+        25,
+        30
+      ],
+      "id": 5,
+      "hashedPass": "$2b$04$QApdyRlKfTOUyccmbY2ZD.hljG5ZHa6lTeoir3JU05Ix4PzUOQjU6"
     }
   ]
 }

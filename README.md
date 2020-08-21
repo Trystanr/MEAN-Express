@@ -12,7 +12,7 @@
 	<a href="#about-the-project"><strong>Explore the docs »</strong></a>
 	<br />
 	<br />
-	<a href="https://youtu.be/jeUycDrsBB0">View Demo</a>
+	<a href="https://youtu.be/_Ar2QRVhH34">View Demo</a>
 </p>
 </p>
 
@@ -23,6 +23,7 @@
 * [App Features](#app-features)
 * [User Guide](#user-guide)
 * [Installing and running the project](#installing-and-running-the-project)
+* [Notes](#notes)
 * [Demo Video](#demo-video)
 * [Plagiarism](#plagiarism)
 * [Requests](#example-requests)
@@ -85,11 +86,15 @@ The brief for this project was to create an Express server for an online high sc
 1. Run `npm run build`
 1. On build completion, navigate to `localhost:8000`
 
-Important note: Chrome does not store cookies on localhost. I used Microsoft Edge to test the project, as it allows for cookies on localhost.
+### Notes
+
+* Important note: Chrome does not store cookies on localhost. I used Microsoft Edge to test the project, as it allows for cookies on localhost.
+* Important note: This version is insecure, unhashed passwords are saved for clarity sake, but the server is using hashed passwords for authentication.
+* Important note: This version is insecure, CORS is set for all domains. This should change for a production build.
 
 ### Demo Video
 
-[Short Demo]()
+[Short Demo](https://youtu.be/_Ar2QRVhH34)
 
 
 ### Plagiarism
