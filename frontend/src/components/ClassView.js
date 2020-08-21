@@ -51,12 +51,13 @@ class ClassView extends React.Component {
 		};
 
 		return this.state.data.map((student, index) => {
-			const { id, slot, subject, classroom } = student;
+			const { id, slot, subject,group, classroom } = student;
 			return (
 				<tr key={id} onClick={(e) => classClick(id, e)}>
 					<td>{id}</td>
 					<td>{slot}</td>
 					<td>{subject}</td>
+					<td>{group}</td>
 					<td>{classroom}</td>
 				</tr>
 			);
